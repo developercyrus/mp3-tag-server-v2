@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet"/> -->
+    <link href="/mermaid.min.css" rel="stylesheet"/>
+    <title>sermon server</title>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+
+    <!-- <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script> -->
+    <script src="/gridjs.umd.js"></script>
+    <script>
+      new gridjs.Grid({
+        columns: [{
+            name: 'filename',
+          }, {
+            name: 'title',
+            formatter: (_, row) => gridjs.html(`<a href=''>${row.cells[1].data}</a>`),
+          }, {
+            name: 'album',
+          }, {
+            name: 'artist',
+            width: '10%'
+          }, {
+            name: 'year',
+            width: '10%'
+          }, {
+            name: 'comments',
+            width: '10%'
+          }, {
+            name: 'lyrics',
+          }
+        ],
+        pagination: {
+          enabled: true,
+          limit: 50
+        },
+        sort: {
+          enabled: true,
+        },
+        style: {
+          container: {
+            'max-width': '100%',
+          },
+        },
+        //width: '1300px',
+        search: true,
+        server: {
+          url: '/api',
+          then: data => data.results.map(file => [file.filename, file.tags.title, file.tags.album, file.tags.artist, file.tags.year, file.tags.comments, file.tags.lyrics])
+        }
+      }).render(document.getElementById("wrapper"));
+
+      const container = document.getElementsByClassName("gridjs-container");
+      container[0].style.removeProperty('width');
+    </script>
+  </body>
+</html>
