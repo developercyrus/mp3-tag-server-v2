@@ -46,6 +46,7 @@
         },
         //width: '1300px',
         search: true,
+        // https://gridjs.io/docs/examples/server/
         server: {
           url: '/api',
           then: data => data.results.map(file => [file.filename, file.tags.title, file.tags.album, file.tags.artist, file.tags.year, file.tags.comments, file.tags.lyrics])
