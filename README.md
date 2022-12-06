@@ -1,7 +1,7 @@
 ### api
 ```bash
 {
-  filename: '/home/peter/music/SUN070923-01.mp3',
+  filename: '/home/peter/music/200709.mp3',
   tags: {
     version: { v1: [Object], v2: [Object] },
     image: {
