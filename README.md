@@ -124,5 +124,6 @@ npm install
 
 ### run
 ```bash
+export MUSIC=/home/peter/music
 node index.js
 ```
