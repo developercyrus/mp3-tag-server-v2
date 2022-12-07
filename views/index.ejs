@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet"/> -->
+    <link href="/mermaid.min.css" rel="stylesheet"/>
+    <title>sermon server</title>
+  </head>
+  <body>
+    <div id="wrapper"></div>
+
+    <!-- <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script> -->
+    <script src="/gridjs.umd.js"></script>
+    <script>
+      const grid = new gridjs.Grid({
+        columns: [{
+            name: 'id', 
+          }, {
+            name: 'filename', 
+          }, {
+            name: 'title',
+          }, {
+            name: 'lyrics',
+          }          
+        ],
+        style: {
+          container: {
+            'max-width': '100%',
+          },
+          td: {
+            'vertical-align': 'top',
+            'white-space': 'pre-wrap',
+          }
+        },
+        //resizable: true,
+        // https://gridjs.io/docs/examples/server/
+        server: {
+          url: '/api/<%=id%>',
+          then: data => data.results.map(file => [file.id, file.filename, file.tags.title, file.tags.lyrics])
+        }
+      }).render(document.getElementById("wrapper"));
+            
+      //the width is come from original; to make sure the sytle max-width: 100% can be used
+      const container = document.getElementsByClassName("gridjs-container");
+      container[0].style.removeProperty('width');
+      
+
+    </script>
+  </body>
+</html>

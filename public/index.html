@@ -11,12 +11,27 @@
     <!-- <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script> -->
     <script src="/gridjs.umd.js"></script>
     <script>
-      new gridjs.Grid({
+      const grid = new gridjs.Grid({
         columns: [{
+            name: 'id',
+            formatter: (_, row) => gridjs.html(`<a href='view/${row.cells[0].data}'>${row.cells[0].data}</a>`), 
+            sort: {
+              enabled: true,
+              compare: (a, b) => {
+                if (a > b) {
+                  return 1;
+                } else if (b > a) {
+                  return -1;
+                } else {
+                  return 0;
+                }
+              }
+            },
+          }, {
             name: 'filename',
           }, {
             name: 'title',
-            formatter: (_, row) => gridjs.html(`<a href=''>${row.cells[1].data}</a>`),
+            formatter: (_, row) => gridjs.html(`<a href=''>${row.cells[2].data}</a>`),
           }, {
             name: 'album',
           }, {
@@ -29,33 +44,46 @@
             name: 'comments',
             width: '10%'
           }, {
+            name: 'lyricshort',
+            width: '10%'
+          }, {
             name: 'lyrics',
-          }
+            width: '10%',
+            hidden: true,
+          }          
         ],
         pagination: {
           enabled: true,
           limit: 50
         },
-        sort: {
-          enabled: true,
-        },
+        //sort: {
+        //  enabled: true,
+        //},
         style: {
           container: {
             'max-width': '100%',
           },
         },
-        //width: '1300px',
-        search: true,
+        //resizable: true,
+        search: {
+          enabled: true,
+          ignoreHiddenColumns: false,
+        },
         // https://gridjs.io/docs/examples/server/
         server: {
           url: '/api',
-          then: data => data.results.map(file => [file.filename, file.tags.title, file.tags.album, file.tags.artist, file.tags.year, file.tags.comments, file.tags.lyrics])
+          then: data => data.results.map(file => [file.id, file.filename, file.tags.title, file.tags.album, file.tags.artist, file.tags.year, file.tags.comments, file.lyricshort, file.tags.lyrics])
         }
       }).render(document.getElementById("wrapper"));
-
+      
+      
       //the width is come from original; to make sure the sytle max-width: 100% can be used
       const container = document.getElementsByClassName("gridjs-container");
       container[0].style.removeProperty('width');
+
+      const column = document.querySelector('[data-column-id="id"]')
+      column.click()
+      
     </script>
   </body>
 </html>
