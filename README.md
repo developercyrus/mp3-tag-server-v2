@@ -1,7 +1,8 @@
-### api
+### /api
 ```json
 {
   "results": [{
+      "id": 1,
       "filename": "/home/peter/music/070930.mp3",
       "tags": {
         "version": {
@@ -27,8 +28,10 @@
         "comment": "",
         "track": 0,
         "genre": ""
-      }
+      },
+      "lyricshort": null
     }, {
+      "id": 2,
       "filename": "/home/peter/music/070923.mp3",
       "tags": {
         "version": {
@@ -68,7 +71,46 @@
         "comment": "",
         "track": 0,
         "genre": ""
-      }
+      },
+      "lyricshort": "太18:19-20..."
+    }
+  ]
+}
+
+```
+
+### /api/:id
+```json
+{
+  "results": [{
+      "id": 1,
+      "filename": "/home/peter/music/070930.mp3",
+      "tags": {
+        "version": {
+          "v1": {
+            "major": 1,
+            "minor": 1
+          },
+          "v2": {
+            "major": 2,
+            "flags": {
+              "unsync": 0,
+              "xheader": 0,
+              "experimental": 0
+            },
+            "minor": 3,
+            "revision": 0
+          }
+        },
+        "album": "講道",
+        "artist": "XXX",
+        "title": "同心",
+        "year": "2007",
+        "comment": "",
+        "track": 0,
+        "genre": ""
+      },
+      "lyricshort": null
     }
   ]
 }
