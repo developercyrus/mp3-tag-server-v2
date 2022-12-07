@@ -7,7 +7,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 
-var resDir = "/home/peter/music"
+var resDir = process.env.MUSIC
 var results = []
 var public = path.join(__dirname, 'public');
 
@@ -28,7 +28,7 @@ function scan(dir) {
                   //console.log( tags );
                   obj.tags = tags;
                   if (tags.hasOwnProperty("lyrics") && tags.lyrics) {
-                    obj.lyricshort = tags.lyrics.substring(0, 20) + '...';
+                    obj.lyricshort = tags.lyrics.substring(0, 30) + '...';
                   }
                   else {
                     obj.lyricshort = null
