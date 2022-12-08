@@ -1,12 +1,12 @@
 FROM ubuntu:22.04
 
 RUN apt-get update
-RUN apt-get install -y curl git
+RUN apt-get install -y curl git sudo
 RUN curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-RUN apt-get install -y nodejs
+RUN apt-get install -y nodejs npm
 
-RUN git clone https://github.com/developercyrus/mp3-tag-server
-RUN cd mp3-tag-server
+WORKDIR /app
+COPY . /app
 RUN npm install
 
 EXPOSE 3004
