@@ -3,11 +3,14 @@ var fs   = require('fs');
 var find = require('find');
 var path = require('path');
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const app = express()
+const axios = require("axios");
+const httpAdapter = require("axios/lib/adapters/http");
 
-var resDir = process.env.MUSIC
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+
+var resDir = process.env.MUSIC;
 var results = []
 var public = path.join(__dirname, 'public');
 
@@ -16,7 +19,8 @@ scan(resDir);
 function scan(dir) {
   find.file(dir, function (files) {
     for (let i = 0; i < files.length; i++) {
-      if (files[i].toLowerCase().includes("mp3")) {
+      //if (files[i].toLowerCase().includes("mp3")) {
+      if (files[i].toLowerCase().endsWith("mp3")) {
         fs.readFile( files[i], function ( err, data ) {
           if (!err) {
             try {
@@ -31,7 +35,7 @@ function scan(dir) {
                     obj.lyricshort = tags.lyrics.substring(0, 30) + '...';
                   }
                   else {
-                    obj.lyricshort = null
+                    obj.lyricshort = null;
                   }
                 }
                 else {
@@ -77,10 +81,9 @@ app.get('/api/:id', function (req, res) {
     }
   }
   res.status(200).json({
-    'results': r
+    'results': r,
   });
 })
-
 
 //app.get('/', async (req, res) => {
 app.get('/', function (req, res) {
@@ -89,13 +92,68 @@ app.get('/', function (req, res) {
 
 //app.get('/', async (req, res) => {
 app.get('/view/:id', function (req, res) {
-  
   res.render('index', {
     id: req.params.id,
   });
 });
 
 
+app.get("/audio/:id", (req, res) => {
+  for (let i = 0; i < results.length; i++) {
+    if (results[i].id == req.params.id) {
+      f = results[i].filename;
+      break;
+    }
+  }
+  res.download(f);
+});
+
+
+
+/*
+app.get("/audio/:id", (req, res) => {
+  var input
+
+  for (let i = 0; i < results.length; i++) {
+    if (results[i].id == req.params.id) {
+      input = results[i].filename;
+      break;
+    }
+  }
+
+  axios
+    //.get(input, {
+    .get('file://' + input, {
+      responseType: "stream",
+      adapter: httpAdapter,
+      //"Content-Range": "bytes 16561-8065611",
+    })
+    .then((Response) => {
+      const stream = Response.data;
+
+      res.set("content-type", "audio/mp3");
+      res.set("accept-ranges", "bytes");
+      res.set("content-length", Response.headers["content-length"]);
+      console.log(Response);
+
+      stream.on("data", (chunk) => {
+        res.write(chunk);
+      });
+
+      stream.on("error", (err) => {
+        res.sendStatus(404);
+      });
+
+      stream.on("end", () => {
+        res.end();
+      });
+    })
+    .catch((Err) => {
+      console.log(Err.message);
+    });
+});
+*/
+
 app.listen(3004, () => {
-  console.log(`listening at http://127.0.0.1:3004`)
+  console.log(`listening at http://127.0.0.1:3004`);
 })
