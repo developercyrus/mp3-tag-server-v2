@@ -26,7 +26,7 @@ function scan(dir) {
                 obj.id = i;
                 obj.filename = files[i];
                 if (Object.keys( tags ).length > 0) {
-                  //console.log( tags );
+                  console.log( tags );
                   obj.tags = tags;
                   if (tags.hasOwnProperty("lyrics") && tags.lyrics) {
                     obj.lyricshort = tags.lyrics.substring(0, 30) + '...';
