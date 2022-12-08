@@ -1,3 +1,8 @@
+### Notes
+```bash
+On 2022 Dec 08, found that some of mp3 with version version 2.4 cannot be parsed correctly
+```
+
 ### Run by docker
 ```bash
 sudo docker run \
