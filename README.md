@@ -1,3 +1,22 @@
+### Run by docker
+```bash
+sudo docker run \
+ --name mp3-tag-server \
+ -p 3004:3004 \
+ --volume /home/peter/music:/music \
+ developercyrus/mp3-tag-server
+```
+
+### Run by CLi
+```bash
+git clone https://github.com/developercyrus/mp3-tag-server
+npm install
+
+export MUSIC=/home/peter/music
+node index.js
+```
+
+
 ### /api
 ```json
 {
@@ -117,13 +136,4 @@
 
 ```
 
-### install
-```bash
-npm install
-```
 
-### run
-```bash
-export MUSIC=/home/peter/music
-node index.js
-```
