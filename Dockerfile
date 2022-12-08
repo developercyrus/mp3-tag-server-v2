@@ -8,6 +8,7 @@ RUN apt-get install -y nodejs npm
 WORKDIR /app
 COPY . /app
 RUN npm install
+ENV MUSIC=/music
 
 EXPOSE 3004
 CMD ["node", "index.js"]
