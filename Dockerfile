@@ -7,6 +7,7 @@ RUN apt-get install -y nodejs
 
 RUN git clone https://github.com/developercyrus/mp3-tag-server
 RUN cd mp3-tag-server
+RUN npm install
 
 EXPOSE 3004
 CMD ["node", "index.js"]
