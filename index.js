@@ -3,9 +3,6 @@ var fs   = require('fs');
 var find = require('find');
 var path = require('path');
 
-const axios = require("axios");
-const httpAdapter = require("axios/lib/adapters/http");
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -107,52 +104,6 @@ app.get("/audio/:id", (req, res) => {
   }
   res.download(f);
 });
-
-
-
-/*
-app.get("/audio/:id", (req, res) => {
-  var input
-
-  for (let i = 0; i < results.length; i++) {
-    if (results[i].id == req.params.id) {
-      input = results[i].filename;
-      break;
-    }
-  }
-
-  axios
-    //.get(input, {
-    .get('file://' + input, {
-      responseType: "stream",
-      adapter: httpAdapter,
-      //"Content-Range": "bytes 16561-8065611",
-    })
-    .then((Response) => {
-      const stream = Response.data;
-
-      res.set("content-type", "audio/mp3");
-      res.set("accept-ranges", "bytes");
-      res.set("content-length", Response.headers["content-length"]);
-      console.log(Response);
-
-      stream.on("data", (chunk) => {
-        res.write(chunk);
-      });
-
-      stream.on("error", (err) => {
-        res.sendStatus(404);
-      });
-
-      stream.on("end", () => {
-        res.end();
-      });
-    })
-    .catch((Err) => {
-      console.log(Err.message);
-    });
-});
-*/
 
 app.listen(3004, () => {
   console.log(`listening at http://127.0.0.1:3004`);
