@@ -4,7 +4,7 @@ sudo docker run \
  --name mp3-tag-server \
  -p 3005:3005 \
  --volume /home/peter/music:/music \
- developercyrus/mp3-tag-server
+ developercyrus/mp3-tag-server-v2
 ```
 
 ### Run by CLi
