@@ -26,10 +26,10 @@
           },{
             name: 'album',
           }, {
-            name: 'title',
-          }, {
             name: 'year',
             width: '10%'
+          }, {
+            name: 'title',
           }, {
             name: 'comment',
             width: '10%'
@@ -72,9 +72,9 @@
             file.id, 
             ("artist" in file.tags) && file.tags.artist || null,
             ("composer" in file.tags) && file.tags.composer || null,
-            ("album" in file.tags) && file.tags.album || null,            
-            ("title" in file.tags) && file.tags.title || null,
-            file.year, 
+            ("album" in file.tags) && file.tags.album || null,
+            file.year,
+            ("title" in file.tags) && file.tags.title || null, 
             ("comment" in file.tags) && file.tags.comment.text || null, 
             file.filename, //mp3
             file.lyricshort, 

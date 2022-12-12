@@ -84,15 +84,19 @@ function sort() {
   results.sort(function(a, b){
     return cmp(
       [cmp(a.tags.artist, b.tags.artist),
+       cmp(a.tags.composer, b.tags.composer),
        cmp(a.tags.album, b.tags.album),
        cmp(parseInt(a.tags.partOfSet), parseInt(b.tags.partOfSet)),
        cmp(a.tags.trackNumber, b.tags.trackNumber),
+       cmp(a.tags.year, b.tags.year),
        cmp(a.tags.title, b.tags.title)],
       [cmp(b.tags.artist, a.tags.artist),
+       cmp(b.tags.composer, a.tags.composer),
        cmp(b.tags.album, a.tags.album),
        cmp(parseInt(b.tags.partOfSet), parseInt(a.tags.partOfSet)),
        cmp(b.tags.trackNumber, a.tags.trackNumber),
-       cmp(b.tags.title, a.tags.title)]
+       cmp(b.tags.year, a.tags.year),
+       cmp(b.tags.title, a.tags.title),]
     );
   });
 };
