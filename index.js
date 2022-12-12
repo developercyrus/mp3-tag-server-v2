@@ -87,15 +87,15 @@ function sort() {
        cmp(a.tags.composer, b.tags.composer),
        cmp(a.tags.album, b.tags.album),
        cmp(parseInt(a.tags.partOfSet), parseInt(b.tags.partOfSet)),
-       cmp(a.tags.trackNumber, b.tags.trackNumber),
-       cmp(a.tags.year, b.tags.year),
-       cmp(a.tags.title, b.tags.title)],
+       cmp(parseInt(a.tags.trackNumber), parseInt(b.tags.trackNumber)),
+       cmp(parseInt(a.tags.year), parseInt(b.tags.year)),
+       cmp(a.tags.title, b.tags.title),],
       [cmp(b.tags.artist, a.tags.artist),
        cmp(b.tags.composer, a.tags.composer),
        cmp(b.tags.album, a.tags.album),
        cmp(parseInt(b.tags.partOfSet), parseInt(a.tags.partOfSet)),
-       cmp(b.tags.trackNumber, a.tags.trackNumber),
-       cmp(b.tags.year, a.tags.year),
+       cmp(parseInt(b.tags.trackNumber), parseInt(a.tags.trackNumber)),
+       cmp(parseInt(b.tags.year), parseInt(a.tags.year)),
        cmp(b.tags.title, a.tags.title),]
     );
   });
