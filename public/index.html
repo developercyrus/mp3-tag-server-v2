@@ -14,28 +14,31 @@
       const grid = new gridjs.Grid({
         columns: [{
             name: 'id',
-            formatter: (_, row) => gridjs.html(`<a href='view/${row.cells[0].data}'>${row.cells[0].data}</a>`), 
-            sort: {
-              enabled: true,
-            },
-          }, {
-            name: 'title',
-          }, {
-            name: 'mp3',
-            formatter: (_, row) => gridjs.html(`<audio controls src='audio/${row.cells[0].data}'></audio>`),
-          }, {
-            name: 'album',
+            hidden: false,
+            //sort: {
+            //  enabled: false,
+            //},
           }, {
             name: 'artist',
             width: '10%'
           }, {
+            name: 'composer',
+          },{
+            name: 'album',
+          }, {
+            name: 'title',
+          }, {
             name: 'year',
             width: '10%'
           }, {
-            name: 'comments',
+            name: 'comment',
             width: '10%'
           }, {
+            name: 'mp3',
+            formatter: (_, row) => gridjs.html(`<audio controls src='audio/${row.cells[0].data}'></audio>`),
+          }, {
             name: 'lyricshort',
+            formatter: (_, row) => gridjs.html(`<a href='view/${row.cells[0].data}'>${row.cells[8].data || ''}</a>`),
             width: '10%'
           }, {
             name: 'lyrics',
@@ -45,8 +48,9 @@
         ],
         pagination: {
           enabled: true,
-          limit: 50
+          limit: 30
         },
+        sort: true,
         //sort: {
         //  enabled: true,
         //},
@@ -63,18 +67,38 @@
         // https://gridjs.io/docs/examples/server/
         server: {
           url: '/api',
-          then: data => data.results.map(file => [file.id, file.tags.title, file.filename, file.tags.album, file.tags.artist, file.tags.year, file.tags.comments, file.lyricshort, file.tags.lyrics])
+          //https://stackoverflow.com/a/43120377          
+          then: data => data.results.map(file => [
+            file.id, 
+            ("artist" in file.tags) && file.tags.artist || null,
+            ("composer" in file.tags) && file.tags.composer || null,
+            ("album" in file.tags) && file.tags.album || null,            
+            ("title" in file.tags) && file.tags.title || null,
+            file.year, 
+            ("comment" in file.tags) && file.tags.comment.text || null, 
+            file.filename, //mp3
+            file.lyricshort, 
+            ("unsynchronisedLyrics" in file.tags) && file.tags.unsynchronisedLyrics.text || null,
+          ])
         }
       }).render(document.getElementById("wrapper"));
-      
-      
+            
       //the width is come from original; to make sure the sytle max-width: 100% can be used
       const container = document.getElementsByClassName("gridjs-container");
       container[0].style.removeProperty('width');
-
-      const column = document.querySelector('[data-column-id="id"]')
-      column.click()
-      
+ 
+      /*
+      setTimeout(() => {   
+        const column = document.querySelector('[data-column-id="id"]');
+        column.click();
+      }, 1000);
+      */
+   
+      /*
+      const column = document.querySelector('[data-column-id="id"]');
+      column.click();
+      */
+ 
     </script>
   </body>
 </html>

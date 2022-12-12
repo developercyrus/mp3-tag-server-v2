@@ -35,7 +35,7 @@
         // https://gridjs.io/docs/examples/server/
         server: {
           url: '/api/<%=id%>',
-          then: data => data.results.map(file => [file.id, file.filename, file.tags.title, file.tags.lyrics])
+          then: data => data.results.map(file => [file.id, file.filename, file.tags.title, file.tags.unsynchronisedLyrics.text])
         }
       }).render(document.getElementById("wrapper"));
             

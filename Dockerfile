@@ -10,6 +10,6 @@ COPY . /app
 RUN npm install
 ENV MUSIC=/music
 
-EXPOSE 3004
+EXPOSE 3005
 CMD ["node", "index.js"]
 
