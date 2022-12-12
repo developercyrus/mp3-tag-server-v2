@@ -82,21 +82,26 @@ function cmp(x, y){
 
 function sort() {
   results.sort(function(a, b){
+    //console.log(a.filename + " " + b.filename);
     return cmp(
-      [cmp(a.tags.artist, b.tags.artist),
-       cmp(a.tags.composer, b.tags.composer),
-       cmp(a.tags.album, b.tags.album),
-       cmp(parseInt(a.tags.partOfSet), parseInt(b.tags.partOfSet)),
-       cmp(parseInt(a.tags.trackNumber), parseInt(b.tags.trackNumber)),
-       cmp(parseInt(a.tags.year), parseInt(b.tags.year)),
-       cmp(a.tags.title, b.tags.title),],
-      [cmp(b.tags.artist, a.tags.artist),
-       cmp(b.tags.composer, a.tags.composer),
-       cmp(b.tags.album, a.tags.album),
-       cmp(parseInt(b.tags.partOfSet), parseInt(a.tags.partOfSet)),
-       cmp(parseInt(b.tags.trackNumber), parseInt(a.tags.trackNumber)),
-       cmp(parseInt(b.tags.year), parseInt(a.tags.year)),
-       cmp(b.tags.title, a.tags.title),]
+      [
+        cmp(a.tags.artist, b.tags.artist),
+        cmp(a.tags.composer, b.tags.composer),
+        cmp(a.tags.album, b.tags.album),
+        cmp(parseInt(a.tags.partOfSet), parseInt(b.tags.partOfSet)),
+        cmp(parseInt(a.tags.trackNumber), parseInt(b.tags.trackNumber)),
+        cmp(parseInt(a.tags.year), parseInt(b.tags.year)),
+        cmp(a.tags.title, b.tags.title),
+      ],
+      [
+        cmp(b.tags.artist, a.tags.artist),
+        cmp(b.tags.composer, a.tags.composer),
+        cmp(b.tags.album, a.tags.album),
+        cmp(parseInt(b.tags.partOfSet), parseInt(a.tags.partOfSet)),
+        cmp(parseInt(b.tags.trackNumber), parseInt(a.tags.trackNumber)),
+        cmp(parseInt(b.tags.year), parseInt(a.tags.year)),
+        cmp(b.tags.title, a.tags.title),
+      ]
     );
   });
 };
