@@ -11,5 +11,6 @@ RUN npm install
 ENV MUSIC=/music
 
 EXPOSE 3005
-CMD ["node", "index.js"]
+#CMD ["node", "index.js"]
+CMD ["node", "--inspect", "index.js"]
 
