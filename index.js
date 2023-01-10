@@ -58,6 +58,8 @@ function scan(dir) {
                   else {
                     //console.log(JSON.stringify(obj, null, 2));
                   }
+
+                  console.log(obj.filename);
                 }
               });
             }
