@@ -69,6 +69,7 @@
           url: '/api',
           //https://stackoverflow.com/a/43120377          
           then: data => data.results.map(file => [
+            /*
             file.id, 
             ("artist" in file.tags) && file.tags.artist || null,
             ("composer" in file.tags) && file.tags.composer || null,
@@ -79,6 +80,17 @@
             file.filename, //mp3
             file.lyricshort, 
             ("unsynchronisedLyrics" in file.tags) && file.tags.unsynchronisedLyrics.text || null,
+            */
+            file.id,
+            file.artist,
+            file.composer,
+            file.album,
+            file.year,
+            file.title,
+            file.comment,
+            file.filename,
+            file.lyricshort,
+            file.unsynchronisedLyrics,
           ])
         }
       }).render(document.getElementById("wrapper"));
