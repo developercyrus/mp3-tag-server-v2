@@ -13,11 +13,14 @@ var public = path.join(__dirname, 'public');
 
 
 function scan(dir) {
-  find.file(dir, function (files) {
+  //find.file(dir, function (files) {
+    var files = find.fileSync(dir);
     for (let i = 0; i < files.length; i++) {
       if (files[i].toLowerCase().endsWith("mp3")) {
-        fs.readFile( files[i], function ( err, data ) {
-          if (!err) {
+        //fs.readFile( files[i], function ( err, data ) {
+          var data = fs.readFileSync(files[i]);
+
+          //if (!err) {
             try {
               id3.read(data, function(err, tags) {
                 if (err) {
@@ -106,14 +109,15 @@ function scan(dir) {
             catch(e) {
               console.log(e);
             }
-          }
-          else {
-            console.log(err);
-          }
-        });
+          //}
+          //else {
+          //  console.log(err);
+          //}
+
+        //});
       }
     }
-  });
+  //});
 }
 
 // https://stackoverflow.com/a/3230748
@@ -149,6 +153,9 @@ function sort() {
 };
 
 scan(resDir);
+
+fs = null;
+id3 = null;
 
 app.set('view engine', 'ejs');
 
