@@ -35,7 +35,18 @@
         // https://gridjs.io/docs/examples/server/
         server: {
           url: '/api/<%=id%>',
-          then: data => data.results.map(file => [file.id, file.filename, file.tags.title, file.tags.unsynchronisedLyrics.text])
+          then: data => data.results.map(file => [
+            /*
+            file.id, 
+            file.filename, 
+            file.tags.title, 
+            file.tags.unsynchronisedLyrics.text
+            */
+            file.id,
+            file.filename,
+            file.title,
+            file.unsynchronisedLyrics
+          ])
         }
       }).render(document.getElementById("wrapper"));
             
@@ -43,7 +54,6 @@
       const container = document.getElementsByClassName("gridjs-container");
       container[0].style.removeProperty('width');
       
-
     </script>
   </body>
 </html>

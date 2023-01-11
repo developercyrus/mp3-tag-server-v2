@@ -33,6 +33,7 @@ function scan(dir) {
 
                     if (tags.hasOwnProperty("unsynchronisedLyrics") && tags.unsynchronisedLyrics.text) {
                       obj.lyricshort = tags.unsynchronisedLyrics.text.substring(0, 30) + '...';
+                      obj.unsynchronisedLyrics = tags.unsynchronisedLyrics.text
                     }
                     else {
                       obj.lyricshort = null;
