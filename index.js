@@ -119,7 +119,7 @@ app.use(express.static(public));
 
 //app.get('/api', async (req, res) => {
 app.get('/api', function (req, res) {
-  sort();
+  //sort();
   res.status(200).json({
     'results': results
   });
