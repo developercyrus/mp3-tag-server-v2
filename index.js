@@ -75,6 +75,7 @@ function scan(dir) {
           //}
 
           data = null;
+          tags = null;
         //});
       }
     }
