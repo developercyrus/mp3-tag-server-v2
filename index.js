@@ -13,12 +13,12 @@ var public = path.join(__dirname, 'public');
 
 
 function scan(dir) {
+
   //find.file(dir, function (files) {
   var files = find.fileSync(dir);
     for (let i = 0; i < files.length; i++) {
       if (files[i].toLowerCase().endsWith("mp3")) {
         //fs.readFile( files[i], function ( err, data ) {
-
           var data = fs.readFileSync(files[i]);
           //if (!err) {
             try {
@@ -30,10 +30,13 @@ function scan(dir) {
                   var obj = new Object();
                   obj.id = i;
                   obj.filename = files[i];
+
                   if (Object.keys( tags ).length > 0) {
-                    obj.tags = tags;
+                    //obj.tags = tags;
+
                     if (tags.hasOwnProperty("unsynchronisedLyrics") && tags.unsynchronisedLyrics.text) {
                       obj.lyricshort = tags.unsynchronisedLyrics.text.substring(0, 30) + '...';
+                      obj.unsynchronisedLyrics = tags.unsynchronisedLyrics.text
                     }
                     else {
                       obj.lyricshort = null;
@@ -48,19 +51,56 @@ function scan(dir) {
                     else {
                       obj.year = null
                     }
+
+
+                    if (tags.hasOwnProperty("artist") && tags.artist) {
+                      obj.artist = tags.artist;
+                    }
+                    else {
+                      obj.artist = null;
+                    }
+
+                    if (tags.hasOwnProperty("composer") && tags.composer) {
+                      obj.composer = tags.composer;
+                    }
+                    else {
+                      obj.composer = null;
+                    }
+
+                    if (tags.hasOwnProperty("album") && tags.album) {
+                      obj.album = tags.album;
+                    }
+                    else {
+                      obj.album = null;
+                    }
+
+                    if (tags.hasOwnProperty("title") && tags.title) {
+                      obj.title = tags.title;
+                    }
+                    else {
+                      obj.title = null;
+                    }
+
+                    if (tags.hasOwnProperty("comment") && tags.comment) {
+                      obj.comment = tags.comment;
+                    }
+                    else {
+                      obj.comment = null;
+                    }
                   }
                   else {
-                    obj.tags = null;
+                    //obj.tags = null;
                   }
 
                   results.push(obj);
+
+                  /*
                   if (tags.hasOwnProperty("image") && tags.image.imageBuffer) {
-                    //console.log(obj);
                     tags.image.imageBuffer = null;
                   }
                   else {
-                    //console.log(JSON.stringify(obj, null, 2));
                   }
+                  */
 
                   console.log(obj.filename);
                 }
