@@ -12,5 +12,5 @@ ENV MUSIC=/music
 
 EXPOSE 3005
 #CMD ["node", "index.js"]
-CMD ["node", "--inspect", "index.js"]
+CMD ["node", "--inspect", "--expose-gc", "index.js"]
 
