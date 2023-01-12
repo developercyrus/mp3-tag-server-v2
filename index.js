@@ -13,13 +13,13 @@ var public = path.join(__dirname, 'public');
 
 
 function scan(dir) {
-  find.file(dir, function (files) {
-    //var files = find.fileSync(dir);
+
+  //find.file(dir, function (files) {
+  var files = find.fileSync(dir);
     for (let i = 0; i < files.length; i++) {
       if (files[i].toLowerCase().endsWith("mp3")) {
-        fs.readFile( files[i], function ( err, data ) {
-          //var data = fs.readFileSync(files[i]);
-
+        //fs.readFile( files[i], function ( err, data ) {
+          var data = fs.readFileSync(files[i]);
           //if (!err) {
             try {
               id3.read(data, function(err, tags) {
@@ -109,20 +109,16 @@ function scan(dir) {
             catch(e) {
               console.log(e);
             }
-          
-          //data = null;
-
           //}
           //else {
           //  console.log(err);
           //}
 
-
-
-        });
+          data = null;
+        //});
       }
     }
-  });
+  //});
 }
 
 // https://stackoverflow.com/a/3230748
@@ -159,9 +155,8 @@ function sort() {
 
 scan(resDir);
 
-//find = null
-//fs = null;
-//id3 = null;
+fs = null;
+id3 = null;
 
 app.set('view engine', 'ejs');
 
@@ -172,7 +167,7 @@ app.use(express.static(public));
 
 //app.get('/api', async (req, res) => {
 app.get('/api', function (req, res) {
-  //sort();
+  sort();
   res.status(200).json({
     'results': results
   });
