@@ -1,7 +1,7 @@
 ### Run by docker
 ```bash
 sudo docker run \
- --name mp3-tag-server \
+ --name mp3-tag-server-v2 \
  -p 3005:3005 \
  --volume /home/peter/music:/music \
  developercyrus/mp3-tag-server-v2
